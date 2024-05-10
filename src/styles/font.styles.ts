@@ -1,4 +1,4 @@
-import { COLORS } from "./colors.style";
+import { COLORS } from "./colors.styles";
 
 export const FONT = {
     SIZE: {
