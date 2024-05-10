@@ -2,19 +2,25 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
 import { AppRoutes } from "~constants/navigation.constants";
-import { LoginScreen } from "~screens/auth/login.screen";
-import { Header } from "~components/layout/header.component";
+import { SplashScreen } from "~screens/splash.screen";
+
+import { AuthNavigator } from "./auth.navigator";
 
 const Stack = createNativeStackNavigator();
 
 export function RootNavigator() {
     return (
         <Stack.Navigator
-            initialRouteName={AppRoutes.Login}
+            initialRouteName={AppRoutes.Splash}
             screenOptions={{
-                header: Header,
+                headerShown: false,
             }}>
-            <Stack.Screen name={AppRoutes.Login} component={LoginScreen} />
+            <Stack.Screen name={AppRoutes.Splash} component={SplashScreen} />
+
+            <Stack.Screen
+                name={AppRoutes.Auth.NAVIGATOR}
+                component={AuthNavigator}
+            />
         </Stack.Navigator>
     );
 }

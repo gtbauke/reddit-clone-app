@@ -1,6 +1,13 @@
 export const AppRoutes = {
     Splash: "Splash",
-    Login: "Login",
-    SignUp: "SignUp",
-    ForgotPassword: "ForgotPassword",
+    Auth: {
+        NAVIGATOR: "Auth",
+        Login: "Login",
+        SignUp: "SignUp",
+        ForgotPassword: "ForgotPassword",
+    },
+    Main: {
+        NAVIGATOR: "Main",
+        Home: "Home",
+    },
 };
