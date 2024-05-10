@@ -3,12 +3,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components": [
+      "~components/*": [
         "./src/components/*"
       ],
-      "@screens": [
+      "~screens/*": [
         "./src/screens/*"
-      ]
+      ],
+      "~constants/*": [
+        "./src/constants/*"
+      ],
     }
   }
 }

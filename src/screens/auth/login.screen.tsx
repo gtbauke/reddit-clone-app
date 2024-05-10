@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-import { Layout } from "../../components/layout/layout.component";
+
+import { Layout } from "~components/layout/layout.component";
 
 export function LoginScreen() {
     return (

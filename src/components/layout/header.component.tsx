@@ -4,7 +4,7 @@ import { FONT } from "src/styles/font.styles";
 import { SPACE } from "src/styles/spacing.styles";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { COLORS } from "src/styles/colors.style";
-import { NativeStackHeaderProps } from "@react-navigation/native-stack";
+import { type NativeStackHeaderProps } from "@react-navigation/native-stack";
 import { getHeaderTitle } from "@react-navigation/elements";
 
 export function Header({ route, navigation, options }: NativeStackHeaderProps) {
