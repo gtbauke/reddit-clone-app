@@ -1,3 +1,5 @@
+const paths = require('./config/paths');
+
 module.exports = {
   presets: ['module:@react-native/babel-preset'],
   plugins: [
@@ -16,11 +18,7 @@ module.exports = {
           '.tsx',
         ],
         root: ['./'],
-        alias: {
-          '~screens': './src/screens',
-          '~components': './src/components',
-          '~constants': './src/constants',
-        },
+        alias: paths
       },
     ],
   ],
