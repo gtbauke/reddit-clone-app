@@ -31,7 +31,7 @@ export function Layout({ children, style, header }: LayoutProps) {
     };
 
     const styles = getStyles(theme);
-    const containerStyle = StyleSheet.compose(styles.container, style);
+    const containerStyle = StyleSheet.compose(styles.contentContainer, style);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -48,5 +48,10 @@ const getStyles = createThemedStyles(theme => ({
     container: {
         flex: 1,
         backgroundColor: theme.BACKGROUND,
+    },
+
+    contentContainer: {
+        flex: 1,
+        paddingHorizontal: theme.SPACE.XLARGE,
     },
 }));

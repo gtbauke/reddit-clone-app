@@ -24,6 +24,7 @@ export type Theme = {
     PRIMARY: ColorPalette;
     TEXT: Color;
     BACKGROUND: Color;
+    BACKGROUND_ALT: Color;
 
     FONT: typeof FONT;
     SPACE: typeof SPACE;
@@ -40,6 +41,7 @@ export const DARK_THEME: Theme = {
     PRIMARY: COLORS.ORANGE_REVERSED,
     TEXT: COLORS.WHITE,
     BACKGROUND: COLORS.GREY[950],
+    BACKGROUND_ALT: COLORS.GREY[800],
 };
 
 export const LIGHT_THEME: Theme = {
@@ -48,6 +50,7 @@ export const LIGHT_THEME: Theme = {
     PRIMARY: COLORS.ORANGE,
     TEXT: COLORS.BLACK,
     BACKGROUND: COLORS.GREY[50],
+    BACKGROUND_ALT: COLORS.GREY[100],
 };
 
 type StyleSheetType = Record<string, ViewStyle | TextStyle | ImageStyle>;

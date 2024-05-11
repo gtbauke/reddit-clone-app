@@ -33,9 +33,7 @@ export function Header({ title, show = true }: HeaderProps) {
         }
 
         return (
-            <TouchableOpacity
-                onPress={handleGoBackPress}
-                style={styles.iconContainer}>
+            <TouchableOpacity onPress={handleGoBackPress}>
                 <FeatherIcon
                     name="chevron-left"
                     style={styles.icon}
@@ -43,7 +41,7 @@ export function Header({ title, show = true }: HeaderProps) {
                 />
             </TouchableOpacity>
         );
-    }, [handleGoBackPress, navigation, styles.icon, styles.iconContainer]);
+    }, [handleGoBackPress, navigation, styles.icon]);
 
     if (!show) {
         return null;
@@ -64,10 +62,6 @@ const getStyles = createThemedStyles(theme => ({
         flexDirection: "row",
         alignItems: "center",
         gap: SPACE.SMALL,
-    },
-
-    iconContainer: {
-        padding: SPACE.XSMALL,
     },
 
     icon: {
