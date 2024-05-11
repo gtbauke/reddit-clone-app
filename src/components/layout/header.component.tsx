@@ -3,10 +3,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FONT } from "src/styles/font.styles";
 import { SPACE } from "src/styles/spacing.styles";
 import FeatherIcon from "react-native-vector-icons/Feather";
-import { COLORS } from "src/styles/colors.style";
+import { COLORS } from "src/styles/colors.styles";
 import { type NativeStackHeaderProps } from "@react-navigation/native-stack";
 import { getHeaderTitle } from "@react-navigation/elements";
 
+// TODO: change this to be a normal component instead of a substitute of React Navigation Header component
 export function Header({ route, navigation, options }: NativeStackHeaderProps) {
     const headerTitle = getHeaderTitle(options, route.name);
 

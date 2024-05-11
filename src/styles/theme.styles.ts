@@ -7,5 +7,13 @@ export const THEME = {
     SPACE,
     COLORS,
 
-    PRIMARY: COLORS.ORANGE,
+    dark: {
+        PRIMARY: COLORS.ORANGE_REVERSED,
+    },
+
+    light: {
+        PRIMARY: COLORS.ORANGE,
+    },
 } as const;
+
+export type ThemeType = typeof THEME;
