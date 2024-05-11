@@ -50,7 +50,7 @@ const getStyles = createThemedStyles(theme => ({
     },
 
     input: {
-        borderRadius: 10,
+        borderRadius: theme.BORDER_RADIUS.MEDIUM,
         borderColor: theme.PRIMARY[300],
         borderWidth: 1,
         backgroundColor: theme.PRIMARY[50],

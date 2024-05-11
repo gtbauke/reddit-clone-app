@@ -23,16 +23,28 @@ type Color = string;
 export type Theme = {
     PRIMARY: ColorPalette;
     TEXT: Color;
+    TEXT_ALT: Color;
     BACKGROUND: Color;
     BACKGROUND_ALT: Color;
 
     FONT: typeof FONT;
     SPACE: typeof SPACE;
+
+    BORDER_RADIUS: {
+        SMALL: number;
+        MEDIUM: number;
+        LARGE: number;
+    };
 };
 
 const BASE_THEME = {
     FONT: FONT,
     SPACE: SPACE,
+    BORDER_RADIUS: {
+        SMALL: 5,
+        MEDIUM: 10,
+        LARGE: 20,
+    },
 };
 
 export const DARK_THEME: Theme = {
@@ -40,6 +52,7 @@ export const DARK_THEME: Theme = {
 
     PRIMARY: COLORS.ORANGE_REVERSED,
     TEXT: COLORS.WHITE,
+    TEXT_ALT: COLORS.GREY[200],
     BACKGROUND: COLORS.GREY[950],
     BACKGROUND_ALT: COLORS.GREY[800],
 };
@@ -49,6 +62,7 @@ export const LIGHT_THEME: Theme = {
 
     PRIMARY: COLORS.ORANGE,
     TEXT: COLORS.BLACK,
+    TEXT_ALT: COLORS.GREY[700],
     BACKGROUND: COLORS.GREY[50],
     BACKGROUND_ALT: COLORS.GREY[100],
 };

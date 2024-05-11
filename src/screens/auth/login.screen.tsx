@@ -1,8 +1,11 @@
 import React from "react";
-import { Button, Text, View } from "react-native";
+import { View } from "react-native";
 
 import { Layout } from "~components/layout/layout.component";
+import { Button } from "~components/ui/button.component";
 import { Input } from "~components/ui/forms/input.component";
+import { Text } from "~components/ui/text.component";
+import { TouchableText } from "~components/ui/touchable-text.component";
 import { useTheme } from "~contexts/theme.context";
 import { createThemedStyles } from "~styles/theme.styles";
 
@@ -23,16 +26,20 @@ export function LoginScreen() {
                 <View style={styles.passwordContainer}>
                     <Input label="Password" />
 
-                    <Text style={styles.forgotPasswordText}>
+                    <TouchableText
+                        onPress={() => null}
+                        style={styles.forgotPasswordText}
+                        notImportant>
                         Forgot password?
-                    </Text>
+                    </TouchableText>
                 </View>
 
-                <View>
-                    <Button title="Log in" onPress={() => null} />
-                    <Text>
-                        Don't have an account? <Text>Sign up</Text>
-                    </Text>
+                <View style={styles.buttonContainer}>
+                    <Button onPress={() => null}>Log in</Button>
+                    <TouchableText onPress={() => null} notImportant>
+                        Don't have an account?{" "}
+                        <Text style={styles.highlightedText}>Sign up</Text>
+                    </TouchableText>
                 </View>
             </View>
         </Layout>
@@ -54,5 +61,14 @@ const getStyles = createThemedStyles(theme => ({
 
     forgotPasswordText: {
         alignSelf: "flex-end",
+    },
+
+    buttonContainer: {
+        gap: theme.SPACE.SMALL,
+        alignItems: "center",
+    },
+
+    highlightedText: {
+        color: theme.PRIMARY[500],
     },
 }));
