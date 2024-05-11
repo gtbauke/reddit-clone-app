@@ -15,5 +15,6 @@ export const FONT = {
     },
     COLOR: {
         BLACK: COLORS.BLACK,
+        WHITE: COLORS.WHITE,
     },
 } as const;

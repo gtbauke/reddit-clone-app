@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useCallback, useContext } from "react";
 import { useColorScheme } from "react-native";
 
 import { useAsyncState } from "../hooks/use-async-state.hook";
@@ -8,6 +8,7 @@ export type ThemeKeys = "light" | "dark";
 export type ThemeContextProps = {
     theme: ThemeKeys;
     setTheme: (theme: ThemeKeys) => void;
+    toggleTheme: () => void;
 };
 
 export const ThemeContext = createContext<ThemeContextProps>(
@@ -26,8 +27,12 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         options: { shouldOverride: true },
     });
 
+    const toggleTheme = useCallback(() => {
+        setTheme(prev => (prev === "dark" ? "light" : "dark"));
+    }, [setTheme]);
+
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );

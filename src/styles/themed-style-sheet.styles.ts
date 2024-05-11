@@ -12,6 +12,10 @@ type ResponseStyle<T extends ThemedStyleSheet> = {
     [P in keyof T]: ViewStyle | TextStyle | ImageStyle;
 };
 
+export type ProcessStylesType = (
+    key: ThemeKeys,
+) => ResponseStyle<ThemedStyleSheet>;
+
 export function createThemedStyleSheet<T extends ThemedStyleSheet>(styles: T) {
     return function processStyles(key: ThemeKeys) {
         const finalStyles = {} as ResponseStyle<T>;

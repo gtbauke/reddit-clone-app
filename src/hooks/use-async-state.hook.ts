@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 
 type InitialValue<T> = T | (() => T);
+type FromPreviousValue<T> = (prev: T) => T;
 
 type UseAsyncStateOptions = {
     shouldOverride?: boolean;
@@ -34,9 +35,14 @@ export function useAsyncState<T>(props: UseAsyncStateProps<T>) {
         getInitialValue().then(setState);
     }, [options.shouldOverride, props.initialValue, props.key]);
 
-    const updateState = async (value: T) => {
-        setState(value);
-        await AsyncStorage.setItem(props.key, JSON.stringify(value));
+    const updateState = async (value: T | FromPreviousValue<T>) => {
+        const newValue =
+            typeof value === "function"
+                ? (value as FromPreviousValue<T>)(state)
+                : value;
+
+        setState(newValue);
+        await AsyncStorage.setItem(props.key, JSON.stringify(newValue));
     };
 
     return [state, updateState] as const;

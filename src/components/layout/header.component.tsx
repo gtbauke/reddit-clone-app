@@ -1,11 +1,13 @@
-import React, { useCallback } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useCallback, useMemo } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { FONT } from "~styles/font.styles";
 import { SPACE } from "~styles/spacing.styles";
 import { COLORS } from "~styles/colors.styles";
+import { createThemedStyleSheet } from "~styles/themed-style-sheet.styles";
+import { useTheme } from "~contexts/theme.context";
 
 type HeaderProps = {
     title?: string;
@@ -15,8 +17,10 @@ type HeaderProps = {
 export function Header({ title, show = true }: HeaderProps) {
     const route = useRoute();
     const navigation = useNavigation();
+    const { theme } = useTheme();
 
     const headerTitle = title || route.name;
+    const styles = useMemo(() => getStyles(theme), [theme]);
 
     const handleGoBackPress = useCallback(() => {
         if (navigation.canGoBack()) {
@@ -35,12 +39,12 @@ export function Header({ title, show = true }: HeaderProps) {
                 style={styles.iconContainer}>
                 <FeatherIcon
                     name="chevron-left"
-                    color={COLORS.BLACK}
+                    style={styles.icon}
                     size={24}
                 />
             </TouchableOpacity>
         );
-    }, [handleGoBackPress, navigation]);
+    }, [handleGoBackPress, navigation, styles.icon, styles.iconContainer]);
 
     if (!show) {
         return null;
@@ -54,7 +58,7 @@ export function Header({ title, show = true }: HeaderProps) {
     );
 }
 
-const styles = StyleSheet.create({
+const getStyles = createThemedStyleSheet({
     container: {
         paddingHorizontal: SPACE.XLARGE,
         paddingVertical: SPACE.MEDIUM,
@@ -67,9 +71,23 @@ const styles = StyleSheet.create({
         padding: SPACE.XSMALL,
     },
 
+    icon: {
+        light: {
+            color: COLORS.BLACK,
+        },
+        dark: {
+            color: COLORS.WHITE,
+        },
+    },
+
     text: {
         fontSize: FONT.SIZE.XLARGE,
         fontWeight: FONT.WEIGHT.BOLD,
-        color: FONT.COLOR.BLACK,
+        light: {
+            color: FONT.COLOR.BLACK,
+        },
+        dark: {
+            color: FONT.COLOR.WHITE,
+        },
     },
 });
