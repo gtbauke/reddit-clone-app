@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useMemo } from "react";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import React, { useCallback, useMemo } from "react";
 import { View } from "react-native";
 import { useTheme } from "src/contexts/theme.context";
 import { THEME } from "src/styles/theme.styles";
@@ -13,14 +13,16 @@ export function SplashScreen() {
 
     const navigation = useNavigation();
 
-    useEffect(() => {
+    const handleFocusEffect = useCallback(() => {
         setTimeout(() => {
             navigation.navigate("Auth", { screen: "Login" });
         }, 1000);
     }, [navigation]);
 
+    useFocusEffect(handleFocusEffect);
+
     return (
-        <Layout style={styles.container}>
+        <Layout style={styles.container} header={{ headerShown: false }}>
             <View style={styles.outerCircle}>
                 <View style={styles.innerCircle}>
                     <View style={styles.finalCircle} />

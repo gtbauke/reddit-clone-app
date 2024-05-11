@@ -1,15 +1,22 @@
 import React, { useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { FONT } from "src/styles/font.styles";
-import { SPACE } from "src/styles/spacing.styles";
 import FeatherIcon from "react-native-vector-icons/Feather";
-import { COLORS } from "src/styles/colors.styles";
-import { type NativeStackHeaderProps } from "@react-navigation/native-stack";
-import { getHeaderTitle } from "@react-navigation/elements";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-// TODO: change this to be a normal component instead of a substitute of React Navigation Header component
-export function Header({ route, navigation, options }: NativeStackHeaderProps) {
-    const headerTitle = getHeaderTitle(options, route.name);
+import { FONT } from "~styles/font.styles";
+import { SPACE } from "~styles/spacing.styles";
+import { COLORS } from "~styles/colors.styles";
+
+type HeaderProps = {
+    title?: string;
+    show?: boolean;
+};
+
+export function Header({ title, show = true }: HeaderProps) {
+    const route = useRoute();
+    const navigation = useNavigation();
+
+    const headerTitle = title || route.name;
 
     const handleGoBackPress = useCallback(() => {
         if (navigation.canGoBack()) {
@@ -34,6 +41,10 @@ export function Header({ route, navigation, options }: NativeStackHeaderProps) {
             </TouchableOpacity>
         );
     }, [handleGoBackPress, navigation]);
+
+    if (!show) {
+        return null;
+    }
 
     return (
         <View style={styles.container}>

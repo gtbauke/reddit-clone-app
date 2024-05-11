@@ -18,12 +18,13 @@ export function RootNavigator() {
     const { theme } = useTheme();
     const statusBarBackground =
         theme === "dark" ? THEME.COLORS.GREY[950] : THEME.COLORS.GREY[50];
+    const statusBarStyle = theme === "dark" ? "light-content" : "dark-content";
 
     return (
         <>
             <StatusBar
                 backgroundColor={statusBarBackground}
-                barStyle="light-content"
+                barStyle={statusBarStyle}
                 translucent
             />
             <Stack.Navigator
