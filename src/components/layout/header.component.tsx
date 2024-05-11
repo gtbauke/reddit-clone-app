@@ -1,13 +1,12 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { FONT } from "~styles/font.styles";
 import { SPACE } from "~styles/spacing.styles";
-import { COLORS } from "~styles/colors.styles";
-import { createThemedStyleSheet } from "~styles/themed-style-sheet.styles";
 import { useTheme } from "~contexts/theme.context";
+import { createThemedStyles } from "~styles/theme.styles";
 
 type HeaderProps = {
     title?: string;
@@ -20,7 +19,7 @@ export function Header({ title, show = true }: HeaderProps) {
     const { theme } = useTheme();
 
     const headerTitle = title || route.name;
-    const styles = useMemo(() => getStyles(theme), [theme]);
+    const styles = getStyles(theme);
 
     const handleGoBackPress = useCallback(() => {
         if (navigation.canGoBack()) {
@@ -58,7 +57,7 @@ export function Header({ title, show = true }: HeaderProps) {
     );
 }
 
-const getStyles = createThemedStyleSheet({
+const getStyles = createThemedStyles(theme => ({
     container: {
         paddingHorizontal: SPACE.XLARGE,
         paddingVertical: SPACE.MEDIUM,
@@ -72,22 +71,12 @@ const getStyles = createThemedStyleSheet({
     },
 
     icon: {
-        light: {
-            color: COLORS.BLACK,
-        },
-        dark: {
-            color: COLORS.WHITE,
-        },
+        color: theme.TEXT,
     },
 
     text: {
         fontSize: FONT.SIZE.XLARGE,
         fontWeight: FONT.WEIGHT.BOLD,
-        light: {
-            color: FONT.COLOR.BLACK,
-        },
-        dark: {
-            color: FONT.COLOR.WHITE,
-        },
+        color: theme.TEXT,
     },
-});
+}));

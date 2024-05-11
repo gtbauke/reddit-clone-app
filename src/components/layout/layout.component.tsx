@@ -1,10 +1,9 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { createThemedStyleSheet } from "~styles/themed-style-sheet.styles";
-import { THEME } from "~styles/theme.styles";
 import { useTheme } from "~contexts/theme.context";
+import { createThemedStyles } from "~styles/theme.styles";
 
 import { Header } from "./header.component";
 
@@ -26,13 +25,12 @@ const DEFAULT_HEADER_OPTIONS: HeaderOptions = {
 
 export function Layout({ children, style, header }: LayoutProps) {
     const { theme } = useTheme();
-    const styles = useMemo(() => getStyles(theme), [theme]);
-
     const headerOptions = {
         ...DEFAULT_HEADER_OPTIONS,
         ...header,
     };
 
+    const styles = getStyles(theme);
     const containerStyle = StyleSheet.compose(styles.container, style);
 
     return (
@@ -46,14 +44,9 @@ export function Layout({ children, style, header }: LayoutProps) {
     );
 }
 
-const getStyles = createThemedStyleSheet({
+const getStyles = createThemedStyles(theme => ({
     container: {
         flex: 1,
-        light: {
-            backgroundColor: THEME.COLORS.GREY[50],
-        },
-        dark: {
-            backgroundColor: THEME.COLORS.GREY[950],
-        },
+        backgroundColor: theme.BACKGROUND,
     },
-});
+}));

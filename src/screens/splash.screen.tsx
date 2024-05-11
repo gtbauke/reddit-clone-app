@@ -1,15 +1,14 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { View } from "react-native";
 import { useTheme } from "src/contexts/theme.context";
-import { THEME } from "src/styles/theme.styles";
-import { createThemedStyleSheet } from "src/styles/themed-style-sheet.styles";
 
 import { Layout } from "~components/layout/layout.component";
+import { createThemedStyles } from "~styles/theme.styles";
 
 export function SplashScreen() {
     const { theme } = useTheme();
-    const styles = useMemo(() => getStyles(theme), [theme]);
+    const styles = getStyles(theme);
 
     const navigation = useNavigation();
 
@@ -32,33 +31,23 @@ export function SplashScreen() {
     );
 }
 
-const getStyles = createThemedStyleSheet({
+const getStyles = createThemedStyles(theme => ({
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        dark: {
-            backgroundColor: THEME.COLORS.GREY[950],
-        },
-        light: {
-            backgroundColor: THEME.COLORS.GREY[50],
-        },
+        backgroundColor: theme.BACKGROUND,
     },
 
     text: {
-        dark: {
-            color: THEME.COLORS.ORANGE_REVERSED[950],
-        },
-        light: {
-            color: THEME.COLORS.ORANGE[950],
-        },
+        color: theme.PRIMARY[500],
     },
 
     outerCircle: {
         width: 100,
         height: 100,
         borderRadius: 100,
-        backgroundColor: THEME.COLORS.ORANGE[500],
+        backgroundColor: theme.PRIMARY[500],
         justifyContent: "center",
         alignItems: "center",
     },
@@ -69,23 +58,13 @@ const getStyles = createThemedStyleSheet({
         borderRadius: 80,
         justifyContent: "center",
         alignItems: "center",
-        dark: {
-            backgroundColor: THEME.COLORS.ORANGE_REVERSED[600],
-        },
-        light: {
-            backgroundColor: THEME.COLORS.ORANGE[400],
-        },
+        backgroundColor: theme.PRIMARY[300],
     },
 
     finalCircle: {
         width: 40,
         height: 40,
         borderRadius: 40,
-        dark: {
-            backgroundColor: THEME.COLORS.ORANGE_REVERSED[700],
-        },
-        light: {
-            backgroundColor: THEME.COLORS.ORANGE[300],
-        },
+        backgroundColor: theme.PRIMARY[100],
     },
-});
+}));

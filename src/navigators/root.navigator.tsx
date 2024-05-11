@@ -2,7 +2,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { useTheme } from "src/contexts/theme.context";
 import { StatusBar } from "react-native";
-import { THEME } from "src/styles/theme.styles";
 
 import {
     AppRoutes,
@@ -15,15 +14,14 @@ import { AuthNavigator } from "./auth.navigator";
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
 export function RootNavigator() {
-    const { theme } = useTheme();
-    const statusBarBackground =
-        theme === "dark" ? THEME.COLORS.GREY[950] : THEME.COLORS.GREY[50];
-    const statusBarStyle = theme === "dark" ? "light-content" : "dark-content";
+    const { theme, themeKey } = useTheme();
+    const statusBarStyle =
+        themeKey === "dark" ? "light-content" : "dark-content";
 
     return (
         <>
             <StatusBar
-                backgroundColor={statusBarBackground}
+                backgroundColor={theme.BACKGROUND}
                 barStyle={statusBarStyle}
                 translucent
             />
