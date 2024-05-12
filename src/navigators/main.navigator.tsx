@@ -94,6 +94,7 @@ function TabNavigator() {
                 options={{
                     tabBarIcon: MessagesTabIcon,
                     tabBarActiveTintColor: COLORS.ORANGE[500],
+                    headerTitle: "Messages",
                 }}
             />
             <Tab.Screen
@@ -102,6 +103,7 @@ function TabNavigator() {
                 options={{
                     tabBarIcon: NotificationsTabIcon,
                     tabBarActiveTintColor: COLORS.ORANGE[500],
+                    headerTitle: "Notifications",
                 }}
             />
 
