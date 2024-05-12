@@ -9,10 +9,15 @@ export const AppRoutes = {
     },
     Main: {
         NAVIGATOR: "Main",
-        Home: "Home",
-        Communities: "Communities",
-        Messages: "Messages",
-        Notifications: "Notifications",
+        Profile: "Profile",
+        Settings: "Settings",
+        Tabs: {
+            NAVIGATOR: "Tabs",
+            Home: "Home",
+            Communities: "Communities",
+            Messages: "Messages",
+            Notifications: "Notifications",
+        },
     },
 } as const;
 
@@ -28,11 +33,17 @@ export type AuthStackParamList = {
     [AppRoutes.Auth.CheckYourEmail]: { email: string };
 };
 
+export type TabsStackParamList = {
+    [AppRoutes.Main.Tabs.Home]: undefined;
+    [AppRoutes.Main.Tabs.Communities]: undefined;
+    [AppRoutes.Main.Tabs.Messages]: undefined;
+    [AppRoutes.Main.Tabs.Notifications]: undefined;
+};
+
 export type MainStackParamList = {
-    [AppRoutes.Main.Home]: undefined;
-    [AppRoutes.Main.Communities]: undefined;
-    [AppRoutes.Main.Messages]: undefined;
-    [AppRoutes.Main.Notifications]: undefined;
+    [AppRoutes.Main.Tabs.NAVIGATOR]: NestedNavigator<TabsStackParamList>;
+    [AppRoutes.Main.Profile]: undefined;
+    [AppRoutes.Main.Settings]: undefined;
 };
 
 export type AppStackParamList = {

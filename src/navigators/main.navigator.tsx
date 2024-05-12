@@ -1,18 +1,26 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import React from "react";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
 import {
     AppRoutes,
+    type TabsStackParamList,
     type MainStackParamList,
 } from "~constants/navigation.constants";
-import { CommunitiesScreen } from "~screens/main/communities.screen";
-import { HomeScreen } from "~screens/main/home.screen";
-import { MessagesScreen } from "~screens/main/messages.screen";
-import { NotificationsScreen } from "~screens/main/notifications.screen";
+import { CommunitiesScreen } from "~screens/main/tabs/communities.screen";
+import { HomeScreen } from "~screens/main/tabs/home.screen";
+import { MessagesScreen } from "~screens/main/tabs/messages.screen";
+import { NotificationsScreen } from "~screens/main/tabs/notifications.screen";
 import { COLORS } from "~styles/colors.styles";
+import { ProfileScreen } from "~screens/main/profile.screen";
+import { SettingsScreen } from "~screens/main/settings.screen";
 
-const Tab = createBottomTabNavigator<MainStackParamList>();
+// TODO: Fix weird padding on drawer screens
+// TODO: Fix drawer header in tab screens
+
+const Drawer = createDrawerNavigator<MainStackParamList>();
+const Tab = createBottomTabNavigator<TabsStackParamList>();
 
 function TabBarIcon({
     name,
@@ -43,32 +51,34 @@ function NotificationsTabIcon({ color }: { color: string; focused: boolean }) {
 }
 
 // TODO: maybe add a custom tab bar
-export function MainNavigator() {
+function TabNavigator() {
     return (
         <Tab.Navigator
             backBehavior="history"
             screenOptions={{
                 headerShown: false,
             }}
-            initialRouteName={AppRoutes.Main.Home}>
+            initialRouteName={AppRoutes.Main.Tabs.Home}>
             <Tab.Screen
-                name={AppRoutes.Main.Home}
+                name={AppRoutes.Main.Tabs.Home}
                 component={HomeScreen}
                 options={{
                     tabBarIcon: HomeTabIcon,
                     tabBarActiveTintColor: COLORS.ORANGE[500],
+                    headerTitle: "",
                 }}
             />
             <Tab.Screen
-                name={AppRoutes.Main.Communities}
+                name={AppRoutes.Main.Tabs.Communities}
                 component={CommunitiesScreen}
                 options={{
                     tabBarIcon: CommunitiesTabIcon,
                     tabBarActiveTintColor: COLORS.ORANGE[500],
+                    headerTitle: "Communities",
                 }}
             />
             <Tab.Screen
-                name={AppRoutes.Main.Messages}
+                name={AppRoutes.Main.Tabs.Messages}
                 component={MessagesScreen}
                 options={{
                     tabBarIcon: MessagesTabIcon,
@@ -76,7 +86,7 @@ export function MainNavigator() {
                 }}
             />
             <Tab.Screen
-                name={AppRoutes.Main.Notifications}
+                name={AppRoutes.Main.Tabs.Notifications}
                 component={NotificationsScreen}
                 options={{
                     tabBarIcon: NotificationsTabIcon,
@@ -84,5 +94,34 @@ export function MainNavigator() {
                 }}
             />
         </Tab.Navigator>
+    );
+}
+
+export function MainNavigator() {
+    return (
+        <Drawer.Navigator
+            initialRouteName="Tabs"
+            screenOptions={{
+                drawerActiveTintColor: COLORS.ORANGE[500],
+            }}>
+            <Drawer.Screen
+                name={AppRoutes.Main.Tabs.NAVIGATOR}
+                component={TabNavigator}
+                options={{
+                    drawerLabel: "Home",
+                    headerTitle: "",
+                }}
+            />
+            <Drawer.Screen
+                name={AppRoutes.Main.Profile}
+                component={ProfileScreen}
+                options={{ drawerLabel: "Profile" }}
+            />
+            <Drawer.Screen
+                name={AppRoutes.Main.Settings}
+                component={SettingsScreen}
+                options={{ drawerLabel: "Settings" }}
+            />
+        </Drawer.Navigator>
     );
 }

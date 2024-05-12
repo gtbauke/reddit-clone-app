@@ -3,10 +3,10 @@ import React from "react";
 import { Layout } from "~components/layout/layout.component";
 import { Text } from "~components/ui/text.component";
 
-export function CommunitiesScreen() {
+export function ProfileScreen() {
     return (
-        <Layout header={{ title: "Communities" }}>
-            <Text>Communities Screen</Text>
+        <Layout header={{ headerShown: false }}>
+            <Text>Profile Screen</Text>
         </Layout>
     );
 }

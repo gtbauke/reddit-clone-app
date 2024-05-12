@@ -21,5 +21,6 @@ module.exports = {
         alias: paths
       },
     ],
+    'react-native-reanimated/plugin'
   ],
 };

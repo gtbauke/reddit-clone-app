@@ -5,7 +5,7 @@ import { Text } from "~components/ui/text.component";
 
 export function NotificationsScreen() {
     return (
-        <Layout header={{ title: "Notifications" }}>
+        <Layout header={{ headerShown: false }}>
             <Text>Notifications Screen</Text>
         </Layout>
     );
