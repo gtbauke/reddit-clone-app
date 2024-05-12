@@ -6,6 +6,7 @@ import {
     View,
     type ViewProps,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type FormViewProps = ViewProps & {
     children: React.ReactNode;
@@ -20,9 +21,11 @@ export function FormView({ children, ...props }: FormViewProps) {
 
     return (
         <TouchableWithoutFeedback onPress={handleOnViewPress}>
-            <View {...props} style={containerStyles}>
-                {children}
-            </View>
+            <KeyboardAwareScrollView style={styles.container}>
+                <View {...props} style={containerStyles}>
+                    {children}
+                </View>
+            </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
     );
 }

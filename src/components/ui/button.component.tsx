@@ -57,7 +57,7 @@ const getStyles = createThemedStyles(theme => ({
     },
 
     disabledContainer: {
-        backgroundColor: theme.PRIMARY[300],
+        backgroundColor: theme.PRIMARY[200],
     },
 
     text: {

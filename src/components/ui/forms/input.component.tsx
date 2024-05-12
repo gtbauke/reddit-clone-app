@@ -16,9 +16,10 @@ import { Text } from "../text.component";
 type InputProps = TextInputProps & {
     label: string;
     error?: string;
+    helperText?: string;
 };
 
-export function Input({ label, error, ...props }: InputProps) {
+export function Input({ label, error, helperText, ...props }: InputProps) {
     const { theme } = useTheme();
     const styles = getStyles(theme);
 
@@ -71,6 +72,11 @@ export function Input({ label, error, ...props }: InputProps) {
                         )}
                     </View>
                 </View>
+                {helperText && !error && (
+                    <Text notImportant style={styles.helperText}>
+                        {helperText}
+                    </Text>
+                )}
                 {error && <Text style={styles.errorMessage}>{error}</Text>}
             </View>
         </TouchableWithoutFeedback>
@@ -126,5 +132,9 @@ const getStyles = createThemedStyles(theme => ({
         height: "100%",
         borderLeftColor: theme.PRIMARY[300],
         borderLeftWidth: 1,
+    },
+
+    helperText: {
+        fontSize: theme.FONT.SIZE.XSMALL,
     },
 }));

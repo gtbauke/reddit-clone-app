@@ -2,7 +2,7 @@ import { COLORS } from "./colors.styles";
 
 export const FONT = {
     SIZE: {
-        XSMALL: 10,
+        XSMALL: 11,
         SMALL: 13,
         MEDIUM: 16,
         LARGE: 20,
