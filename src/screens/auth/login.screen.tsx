@@ -3,6 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useNavigation } from "@react-navigation/native";
 
 import { Layout } from "~components/layout/layout.component";
 import { Button } from "~components/ui/button.component";
@@ -12,6 +13,7 @@ import { TouchableText } from "~components/ui/touchable-text.component";
 import { useTheme } from "~contexts/theme.context";
 import { createThemedStyles } from "~styles/theme.styles";
 import { FormView } from "~components/ui/forms/form-view.component";
+import { AppRoutes } from "~constants/navigation.constants";
 
 const loginSchema = z.object({
     email: z
@@ -55,6 +57,7 @@ export function LoginScreen() {
     });
 
     const [isLoading, setIsLoading] = useState(false);
+    const navigation = useNavigation();
 
     const onSubmit = async (data: LoginFormData) => {
         setIsLoading(true);
@@ -63,6 +66,12 @@ export function LoginScreen() {
         console.log(data);
 
         setIsLoading(false);
+    };
+
+    const handleForgotPasswordPress = () => {
+        navigation.navigate(AppRoutes.Auth.NAVIGATOR, {
+            screen: AppRoutes.Auth.ForgotPassword,
+        });
     };
 
     return (
@@ -107,7 +116,7 @@ export function LoginScreen() {
                     />
 
                     <TouchableText
-                        onPress={() => null}
+                        onPress={handleForgotPasswordPress}
                         style={styles.forgotPasswordText}
                         notImportant>
                         Forgot password?

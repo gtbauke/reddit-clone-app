@@ -3,8 +3,9 @@ export const AppRoutes = {
     Auth: {
         NAVIGATOR: "Auth",
         Login: "Login",
-        SignUp: "SignUp",
+        SignUp: "Sign Up",
         ForgotPassword: "ForgotPassword",
+        CheckYourEmail: "CheckYourEmail",
     },
     Main: {
         NAVIGATOR: "Main",
@@ -21,6 +22,7 @@ export type AuthStackParamList = {
     [AppRoutes.Auth.Login]: undefined;
     [AppRoutes.Auth.SignUp]: undefined;
     [AppRoutes.Auth.ForgotPassword]: undefined;
+    [AppRoutes.Auth.CheckYourEmail]: { email: string };
 };
 
 export type MainStackParamList = {

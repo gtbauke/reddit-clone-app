@@ -52,7 +52,9 @@ export function Input({ label, error, ...props }: InputProps) {
                             ref={inputRef}
                             {...props}
                             style={inputStyles}
-                            secureTextEntry={showSecureText}
+                            secureTextEntry={
+                                props.secureTextEntry && showSecureText
+                            }
                         />
                         {props.secureTextEntry && (
                             <TouchableWithoutFeedback

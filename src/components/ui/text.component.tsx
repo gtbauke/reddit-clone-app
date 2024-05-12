@@ -10,9 +10,14 @@ import { useTheme } from "~contexts/theme.context";
 
 export type TextProps = RNTextProps & {
     notImportant?: boolean;
+    bold?: boolean;
 };
 
-export function Text({ notImportant = false, ...props }: TextProps) {
+export function Text({
+    notImportant = false,
+    bold = false,
+    ...props
+}: TextProps) {
     const { theme } = useTheme();
     const styles = getStyles(theme);
 
@@ -21,7 +26,11 @@ export function Text({ notImportant = false, ...props }: TextProps) {
     return (
         <RNText
             {...props}
-            style={[textStyle, notImportant && styles.notImportant]}
+            style={[
+                textStyle,
+                notImportant && styles.notImportant,
+                bold && styles.bold,
+            ]}
         />
     );
 }
@@ -29,9 +38,14 @@ export function Text({ notImportant = false, ...props }: TextProps) {
 const getStyles = createThemedStyles(theme => ({
     text: {
         color: theme.TEXT,
+        lineHeight: 18, // TODO: add line height to theme
     },
 
     notImportant: {
         color: theme.TEXT_ALT,
+    },
+
+    bold: {
+        fontWeight: theme.FONT.WEIGHT.BOLD,
     },
 }));

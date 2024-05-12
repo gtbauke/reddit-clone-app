@@ -5,6 +5,8 @@ import {
     AppRoutes,
     type AuthStackParamList,
 } from "~constants/navigation.constants";
+import { CheckYourEmailScreen } from "~screens/auth/check-your-email.screen";
+import { ForgotPasswordScreen } from "~screens/auth/forgot-password.screen";
 import { LoginScreen } from "~screens/auth/login.screen";
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
@@ -17,6 +19,14 @@ export function AuthNavigator() {
                 headerShown: false,
             }}>
             <Stack.Screen name={AppRoutes.Auth.Login} component={LoginScreen} />
+            <Stack.Screen
+                name={AppRoutes.Auth.ForgotPassword}
+                component={ForgotPasswordScreen}
+            />
+            <Stack.Screen
+                name={AppRoutes.Auth.CheckYourEmail}
+                component={CheckYourEmailScreen}
+            />
         </Stack.Navigator>
     );
 }

@@ -70,8 +70,10 @@ export const LIGHT_THEME: Theme = {
     BACKGROUND_ALT: COLORS.GREY[100],
 };
 
-type StyleSheetType = Record<string, ViewStyle | TextStyle | ImageStyle>;
-type CreateThemedStylesBuilder<T extends StyleSheetType> = (theme: Theme) => T;
+export type StyleSheetType = Record<string, ViewStyle | TextStyle | ImageStyle>;
+export type CreateThemedStylesBuilder<
+    T extends StyleSheetType = StyleSheetType,
+> = (theme: Theme) => T;
 
 export function createThemedStyles<T extends StyleSheetType>(
     builder: CreateThemedStylesBuilder<T>,
