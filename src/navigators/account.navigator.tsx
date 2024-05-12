@@ -14,12 +14,12 @@ export function AccountNavigator() {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name={AppRoutes.Main.Tabs.Account.Profile}
+                name={AppRoutes.Main.Account.Profile}
                 component={ProfileScreen}
             />
 
             <Stack.Screen
-                name={AppRoutes.Main.Tabs.Account.Settings}
+                name={AppRoutes.Main.Account.Settings}
                 component={SettingsScreen}
             />
         </Stack.Navigator>

@@ -123,7 +123,7 @@ export function SignUpScreen() {
     };
 
     return (
-        <Layout style={styles.container} header={{ title: "Sign up" }}>
+        <Layout style={styles.container}>
             <Text>
                 Sign up text (this is a placeholder, replace it with the actual
                 content)

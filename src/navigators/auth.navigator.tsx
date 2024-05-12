@@ -8,6 +8,7 @@ import {
 import { CheckYourEmailScreen } from "~screens/auth/check-your-email.screen";
 import { ForgotPasswordScreen } from "~screens/auth/forgot-password.screen";
 import { LoginScreen } from "~screens/auth/login.screen";
+import { Header } from "~components/layout/header.component";
 
 import { SignUpScreen } from "../screens/auth/sign-up.screen";
 
@@ -18,12 +19,17 @@ export function AuthNavigator() {
         <Stack.Navigator
             initialRouteName={AppRoutes.Auth.Login}
             screenOptions={{
-                headerShown: false,
+                header: Header,
             }}>
-            <Stack.Screen name={AppRoutes.Auth.Login} component={LoginScreen} />
+            <Stack.Screen
+                name={AppRoutes.Auth.Login}
+                component={LoginScreen}
+                options={{ headerTitle: "Login" }}
+            />
             <Stack.Screen
                 name={AppRoutes.Auth.ForgotPassword}
                 component={ForgotPasswordScreen}
+                options={{ headerTitle: "Forgot password" }}
             />
             <Stack.Screen
                 name={AppRoutes.Auth.CheckYourEmail}

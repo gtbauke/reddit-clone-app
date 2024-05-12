@@ -21,7 +21,7 @@ export function CheckYourEmailScreen() {
     const [otp, setOtp] = useState("");
 
     return (
-        <Layout style={styles.container} header={{ title: "Check your email" }}>
+        <Layout style={styles.container}>
             <Text>
                 We sent a reset link to <Text bold>{email}</Text> with a 5 digit
                 code to reset your password

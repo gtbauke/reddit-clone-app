@@ -56,7 +56,7 @@ export function ForgotPasswordScreen() {
     };
 
     return (
-        <Layout style={styles.container} header={{ title: "Forgot password" }}>
+        <Layout style={styles.container}>
             <Text>Please enter your email to reset the password</Text>
 
             <FormView style={styles.container}>

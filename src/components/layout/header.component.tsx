@@ -1,25 +1,15 @@
 import React, { useCallback } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { type NativeStackHeaderProps } from "@react-navigation/native-stack";
+import { getHeaderTitle } from "@react-navigation/elements";
 
-import { FONT } from "~styles/font.styles";
-import { SPACE } from "~styles/spacing.styles";
-import { useTheme } from "~contexts/theme.context";
 import { createThemedStyles } from "~styles/theme.styles";
+import { useThemedStyles } from "~hooks/use-themed-styles.hook";
 
-type HeaderProps = {
-    title?: string;
-    show?: boolean;
-};
-
-export function Header({ title, show = true }: HeaderProps) {
-    const route = useRoute();
-    const navigation = useNavigation();
-    const { theme } = useTheme();
-
-    const headerTitle = title || route.name;
-    const styles = getStyles(theme);
+export function Header({ navigation, options, route }: NativeStackHeaderProps) {
+    const styles = useThemedStyles(getStyles);
+    const headerTitle = getHeaderTitle(options, route.name);
 
     const handleGoBackPress = useCallback(() => {
         if (navigation.canGoBack()) {
@@ -43,10 +33,6 @@ export function Header({ title, show = true }: HeaderProps) {
         );
     }, [handleGoBackPress, navigation, styles.icon]);
 
-    if (!show) {
-        return null;
-    }
-
     return (
         <View style={styles.container}>
             {renderBackButton()}
@@ -57,11 +43,12 @@ export function Header({ title, show = true }: HeaderProps) {
 
 const getStyles = createThemedStyles(theme => ({
     container: {
-        paddingHorizontal: SPACE.XLARGE,
-        paddingVertical: SPACE.MEDIUM,
+        paddingHorizontal: theme.SPACE.XLARGE,
+        paddingVertical: theme.SPACE.MEDIUM,
         flexDirection: "row",
         alignItems: "center",
-        gap: SPACE.SMALL,
+        gap: theme.SPACE.SMALL,
+        backgroundColor: theme.BACKGROUND,
     },
 
     icon: {
@@ -69,8 +56,8 @@ const getStyles = createThemedStyles(theme => ({
     },
 
     text: {
-        fontSize: FONT.SIZE.XLARGE,
-        fontWeight: FONT.WEIGHT.BOLD,
+        fontSize: theme.FONT.SIZE.XLARGE,
+        fontWeight: theme.FONT.WEIGHT.BOLD,
         color: theme.TEXT,
     },
 }));
