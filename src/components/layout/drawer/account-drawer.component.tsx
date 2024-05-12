@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Text } from "~components/ui/text.component";
 import { useThemedStyles } from "~hooks/use-themed-styles.hook";
 import { createThemedStyles } from "~styles/theme.styles";
+import { useAccountDrawer } from "~contexts/drawer.context";
 
 import { AccountDrawerItem } from "./account-drawer-item.component";
 import { AppRoutes } from "../../../constants/navigation.constants";
@@ -21,11 +22,14 @@ function SettingsIcon({ style }: { style: TextStyle }) {
 export function AccountDrawerContent() {
     const styles = useThemedStyles(themedStyles);
     const navigation = useNavigation();
+    const { close } = useAccountDrawer();
 
     const handleOnProfilePress = () => {
         navigation.navigate(AppRoutes.Main.Tabs.Account.NAVIGATOR, {
             screen: AppRoutes.Main.Tabs.Account.Profile,
         });
+
+        close();
     };
 
     return (

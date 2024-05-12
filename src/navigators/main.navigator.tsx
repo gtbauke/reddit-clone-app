@@ -33,13 +33,13 @@ export function MainNavigator() {
     const { theme } = useTheme();
 
     return (
-        <NativeDrawer
-            open={isRightDrawerOpen}
-            onOpen={() => setIsRightDrawerOpen(true)}
-            onClose={() => setIsRightDrawerOpen(false)}
-            drawerPosition="right"
-            renderDrawerContent={AccountDrawerContent}>
-            <AccountDrawerContext.Provider value={value}>
+        <AccountDrawerContext.Provider value={value}>
+            <NativeDrawer
+                open={isRightDrawerOpen}
+                onOpen={() => setIsRightDrawerOpen(true)}
+                onClose={() => setIsRightDrawerOpen(false)}
+                drawerPosition="right"
+                renderDrawerContent={AccountDrawerContent}>
                 <Drawer.Navigator
                     screenOptions={{
                         header: DrawerHeader,
@@ -55,7 +55,7 @@ export function MainNavigator() {
                         })}
                     />
                 </Drawer.Navigator>
-            </AccountDrawerContext.Provider>
-        </NativeDrawer>
+            </NativeDrawer>
+        </AccountDrawerContext.Provider>
     );
 }
