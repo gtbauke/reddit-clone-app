@@ -1,128 +1,61 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
-import FeatherIcon from "react-native-vector-icons/Feather";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import React, { useMemo, useState } from "react";
+import { Drawer as NativeDrawer } from "react-native-drawer-layout";
 
 import {
     AppRoutes,
     type MainStackParamList,
 } from "~constants/navigation.constants";
-import { CommunitiesScreen } from "~screens/main/tabs/communities.screen";
-import { HomeScreen } from "~screens/main/tabs/home.screen";
-import { MessagesScreen } from "~screens/main/tabs/messages.screen";
-import { NotificationsScreen } from "~screens/main/tabs/notifications.screen";
-import { COLORS } from "~styles/colors.styles";
-import { SPACE } from "~styles/spacing.styles";
-import { CreateScreen } from "~screens/main/tabs/create.screen";
-import { TabHeader } from "~components/layout/tabs/tab-header.component";
+import { Text } from "~components/ui/text.component";
+import { DrawerHeader } from "~components/layout/drawer/drawer-header.component";
+import {
+    getHeaderTitleStyles,
+    getTabHeaderTitle,
+} from "~utils/get-header-title.utils";
 import { useTheme } from "~contexts/theme.context";
+import { AccountDrawerContext } from "~contexts/drawer.context";
 
-import { AccountNavigator } from "./account.navigator";
+import { TabsNavigator } from "./tabs.navigator";
 
-const Tab = createBottomTabNavigator<MainStackParamList>();
+const Drawer = createDrawerNavigator<MainStackParamList>();
 
-function TabBarIcon({
-    name,
-    color,
-    size,
-}: {
-    name: string;
-    color: string;
-    size: number;
-}) {
-    return <FeatherIcon name={name} size={size} color={color} />;
-}
+export function MainNavigator() {
+    const [isRightDrawerOpen, setIsRightDrawerOpen] = useState(false);
+    const value = useMemo(
+        () => ({
+            open: () => setIsRightDrawerOpen(true),
+            close: () => setIsRightDrawerOpen(false),
+            toggle: () => setIsRightDrawerOpen(prev => !prev),
+        }),
+        [],
+    );
 
-function HomeTabIcon({ color }: { color: string; focused: boolean }) {
-    return <TabBarIcon name="home" color={color} size={24} />;
-}
-
-function CommunitiesTabIcon({ color }: { color: string; focused: boolean }) {
-    return <TabBarIcon name="users" color={color} size={24} />;
-}
-
-function CreateTabIcon({ color }: { color: string; focused: boolean }) {
-    return <TabBarIcon name="plus" color={color} size={24} />;
-}
-
-function MessagesTabIcon({ color }: { color: string; focused: boolean }) {
-    return <TabBarIcon name="message-square" color={color} size={24} />;
-}
-
-function NotificationsTabIcon({ color }: { color: string; focused: boolean }) {
-    return <TabBarIcon name="bell" color={color} size={24} />;
-}
-
-function TabNavigator() {
     const { theme } = useTheme();
 
     return (
-        <Tab.Navigator
-            backBehavior="history"
-            screenOptions={{
-                header: TabHeader,
-                headerStyle: { backgroundColor: theme.BACKGROUND },
-                headerTitleStyle: { color: theme.TEXT },
-                tabBarStyle: {
-                    paddingVertical: SPACE.XSMALL,
-                },
-            }}
-            initialRouteName={AppRoutes.Main.Home}>
-            <Tab.Screen
-                name={AppRoutes.Main.Home}
-                component={HomeScreen}
-                options={{
-                    headerShown: false,
-                    tabBarIcon: HomeTabIcon,
-                    tabBarActiveTintColor: COLORS.ORANGE[500],
-                }}
-            />
-            <Tab.Screen
-                name={AppRoutes.Main.Communities}
-                component={CommunitiesScreen}
-                options={{
-                    tabBarIcon: CommunitiesTabIcon,
-                    tabBarActiveTintColor: COLORS.ORANGE[500],
-                    headerTitle: "Communities",
-                }}
-            />
-            <Tab.Screen
-                name={AppRoutes.Main.Create}
-                component={CreateScreen}
-                options={{
-                    tabBarIcon: CreateTabIcon,
-                    tabBarActiveTintColor: COLORS.ORANGE[500],
-                }}
-            />
-            <Tab.Screen
-                name={AppRoutes.Main.Messages}
-                component={MessagesScreen}
-                options={{
-                    tabBarIcon: MessagesTabIcon,
-                    tabBarActiveTintColor: COLORS.ORANGE[500],
-                    headerTitle: "Messages",
-                }}
-            />
-            <Tab.Screen
-                name={AppRoutes.Main.Notifications}
-                component={NotificationsScreen}
-                options={{
-                    tabBarIcon: NotificationsTabIcon,
-                    tabBarActiveTintColor: COLORS.ORANGE[500],
-                    headerTitle: "Notifications",
-                }}
-            />
-
-            <Tab.Screen
-                name={AppRoutes.Main.Account.NAVIGATOR}
-                component={AccountNavigator}
-                options={{
-                    tabBarButton: () => null,
-                }}
-            />
-        </Tab.Navigator>
+        <NativeDrawer
+            open={isRightDrawerOpen}
+            onOpen={() => setIsRightDrawerOpen(true)}
+            onClose={() => setIsRightDrawerOpen(false)}
+            drawerPosition="right"
+            renderDrawerContent={() => <Text>Testing right drawer</Text>}>
+            <AccountDrawerContext.Provider value={value}>
+                <Drawer.Navigator
+                    screenOptions={{
+                        header: DrawerHeader,
+                        headerStyle: { backgroundColor: theme.BACKGROUND },
+                    }}>
+                    <Drawer.Screen
+                        name={AppRoutes.Main.Tabs.NAVIGATOR}
+                        component={TabsNavigator}
+                        options={({ route }) => ({
+                            drawerItemStyle: { display: "none" },
+                            headerTitle: getTabHeaderTitle(route),
+                            headerTitleStyle: getHeaderTitleStyles(route),
+                        })}
+                    />
+                </Drawer.Navigator>
+            </AccountDrawerContext.Provider>
+        </NativeDrawer>
     );
-}
-
-export function MainNavigator() {
-    return <TabNavigator />;
 }
