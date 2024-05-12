@@ -5,8 +5,8 @@ import {
     type AccountStackParamList,
     AppRoutes,
 } from "~constants/navigation.constants";
-import { ProfileScreen } from "~screens/main/profile.screen";
-import { SettingsScreen } from "~screens/main/settings.screen";
+import { ProfileScreen } from "~screens/main/tabs/account/profile.screen";
+import { SettingsScreen } from "~screens/main/tabs/account/settings.screen";
 
 const Stack = createNativeStackNavigator<AccountStackParamList>();
 
