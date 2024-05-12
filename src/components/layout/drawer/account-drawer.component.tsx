@@ -25,8 +25,8 @@ export function AccountDrawerContent() {
     const { close } = useAccountDrawer();
 
     const handleOnProfilePress = () => {
-        navigation.navigate(AppRoutes.Main.Tabs.Account.NAVIGATOR, {
-            screen: AppRoutes.Main.Tabs.Account.Profile,
+        navigation.navigate(AppRoutes.Main.NAVIGATOR, {
+            screen: AppRoutes.Main.Account.Profile,
         });
 
         close();

@@ -1,61 +1,60 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import React, { useMemo, useState } from "react";
-import { Drawer as NativeDrawer } from "react-native-drawer-layout";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 
 import {
-    AppRoutes,
     type MainStackParamList,
+    AppRoutes,
 } from "~constants/navigation.constants";
-import { DrawerHeader } from "~components/layout/drawer/drawer-header.component";
-import {
-    getHeaderTitleStyles,
-    getTabHeaderTitle,
-} from "~utils/get-header-title.utils";
-import { useTheme } from "~contexts/theme.context";
-import { AccountDrawerContext } from "~contexts/drawer.context";
-import { AccountDrawerContent } from "~components/layout/drawer/account-drawer.component";
+import { ProfileScreen } from "~screens/main/tabs/account/profile.screen";
+import { SettingsScreen } from "~screens/main/tabs/account/settings.screen";
+import { Header } from "~components/layout/header.component";
 
-import { TabsNavigator } from "./tabs.navigator";
+import { DrawerNavigator } from "./main/drawer.navigator";
 
-const Drawer = createDrawerNavigator<MainStackParamList>();
+const Stack = createNativeStackNavigator<MainStackParamList>();
 
+/*
+  StackNavigator
+    - Stack.Group
+      - ProfileScreen
+      - SettingsScreen
+    - CreateScreen
+    - DrawerNavigator
+      - TabsNavigator
+        - HomeScreen
+        - CommunitiesScreen
+        - MessagesScreen
+        - NotificationsScreen
+*/
 export function MainNavigator() {
-    const [isRightDrawerOpen, setIsRightDrawerOpen] = useState(false);
-    const value = useMemo(
-        () => ({
-            open: () => setIsRightDrawerOpen(true),
-            close: () => setIsRightDrawerOpen(false),
-            toggle: () => setIsRightDrawerOpen(prev => !prev),
-        }),
-        [],
-    );
-
-    const { theme } = useTheme();
-
     return (
-        <AccountDrawerContext.Provider value={value}>
-            <NativeDrawer
-                open={isRightDrawerOpen}
-                onOpen={() => setIsRightDrawerOpen(true)}
-                onClose={() => setIsRightDrawerOpen(false)}
-                drawerPosition="right"
-                renderDrawerContent={AccountDrawerContent}>
-                <Drawer.Navigator
-                    screenOptions={{
-                        header: DrawerHeader,
-                        headerStyle: { backgroundColor: theme.BACKGROUND },
-                    }}>
-                    <Drawer.Screen
-                        name={AppRoutes.Main.Tabs.NAVIGATOR}
-                        component={TabsNavigator}
-                        options={({ route }) => ({
-                            drawerItemStyle: { display: "none" },
-                            headerTitle: getTabHeaderTitle(route),
-                            headerTitleStyle: getHeaderTitleStyles(route),
-                        })}
-                    />
-                </Drawer.Navigator>
-            </NativeDrawer>
-        </AccountDrawerContext.Provider>
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false,
+            }}
+            initialRouteName="Drawer">
+            <Stack.Group
+                screenOptions={{
+                    headerShown: true,
+                    header: Header,
+                }}>
+                <Stack.Screen
+                    name={AppRoutes.Main.Account.Profile}
+                    component={ProfileScreen}
+                    options={{ headerTitle: "Profile" }}
+                />
+
+                <Stack.Screen
+                    name={AppRoutes.Main.Account.Settings}
+                    component={SettingsScreen}
+                    options={{ headerTitle: "Settings" }}
+                />
+            </Stack.Group>
+
+            <Stack.Screen
+                name={AppRoutes.Main.Drawer.NAVIGATOR}
+                component={DrawerNavigator}
+            />
+        </Stack.Navigator>
     );
 }

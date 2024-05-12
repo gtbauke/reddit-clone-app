@@ -9,17 +9,19 @@ export const AppRoutes = {
     },
     Main: {
         NAVIGATOR: "Main",
-        Tabs: {
-            NAVIGATOR: "Tabs",
-            Home: "Home",
-            Communities: "Communities",
-            Create: "Create",
-            Messages: "Messages",
-            Notifications: "Notifications",
-            Account: {
-                NAVIGATOR: "Account",
-                Profile: "Profile",
-                Settings: "Settings",
+        Account: {
+            Profile: "Profile",
+            Settings: "Settings",
+        },
+        Drawer: {
+            NAVIGATOR: "Drawer",
+            Tabs: {
+                NAVIGATOR: "Tabs",
+                Home: "Home",
+                Communities: "Communities",
+                Create: "Create",
+                Messages: "Messages",
+                Notifications: "Notifications",
             },
         },
     },
@@ -37,30 +39,27 @@ export type AuthStackParamList = {
     [AppRoutes.Auth.CheckYourEmail]: { email: string };
 };
 
-export type AccountStackParamList = {
-    [AppRoutes.Main.Tabs.Account.Profile]: undefined;
-    [AppRoutes.Main.Tabs.Account.Settings]: undefined;
+export type TabsStackParamList = {
+    [AppRoutes.Main.Drawer.Tabs.Home]: undefined;
+    [AppRoutes.Main.Drawer.Tabs.Communities]: undefined;
+    [AppRoutes.Main.Drawer.Tabs.Create]: undefined;
+    [AppRoutes.Main.Drawer.Tabs.Messages]: undefined;
+    [AppRoutes.Main.Drawer.Tabs.Notifications]: undefined;
 };
 
-export type TabsStackParamList = {
-    [AppRoutes.Main.Tabs.Home]: undefined;
-    [AppRoutes.Main.Tabs.Communities]: undefined;
-    [AppRoutes.Main.Tabs.Create]: undefined;
-    [AppRoutes.Main.Tabs.Messages]: undefined;
-    [AppRoutes.Main.Tabs.Notifications]: undefined;
-    [AppRoutes.Main.Tabs.Account
-        .NAVIGATOR]: NestedNavigator<AccountStackParamList>;
+export type DrawerStackParamList = {
+    [AppRoutes.Main.Drawer.Tabs.NAVIGATOR]: NestedNavigator<TabsStackParamList>;
 };
 
 export type MainStackParamList = {
-    [AppRoutes.Main.Tabs.NAVIGATOR]: NestedNavigator<TabsStackParamList>;
+    [AppRoutes.Main.Drawer.NAVIGATOR]: NestedNavigator<DrawerStackParamList>;
+    [AppRoutes.Main.Account.Profile]: undefined;
+    [AppRoutes.Main.Account.Settings]: undefined;
 };
 
 export type AppStackParamList = {
     [AppRoutes.Splash]: undefined;
     [AppRoutes.Auth.NAVIGATOR]: NestedNavigator<AuthStackParamList>;
     [AppRoutes.Main.NAVIGATOR]: NestedNavigator<MainStackParamList>;
-    [AppRoutes.Main.Tabs.NAVIGATOR]: NestedNavigator<TabsStackParamList>;
-    [AppRoutes.Main.Tabs.Account
-        .NAVIGATOR]: NestedNavigator<AccountStackParamList>;
+    [AppRoutes.Main.Drawer.Tabs.NAVIGATOR]: NestedNavigator<TabsStackParamList>;
 };

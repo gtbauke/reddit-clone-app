@@ -14,8 +14,6 @@ import { NotificationsScreen } from "~screens/main/tabs/notifications.screen";
 import { COLORS } from "~styles/colors.styles";
 import { SPACE } from "~styles/spacing.styles";
 
-import { AccountNavigator } from "./account.navigator";
-
 const Tab = createBottomTabNavigator<TabsStackParamList>();
 
 function TabBarIcon({
@@ -60,9 +58,9 @@ export function TabsNavigator() {
                     paddingVertical: SPACE.XSMALL,
                 },
             }}
-            initialRouteName={AppRoutes.Main.Tabs.Home}>
+            initialRouteName={AppRoutes.Main.Drawer.Tabs.Home}>
             <Tab.Screen
-                name={AppRoutes.Main.Tabs.Home}
+                name={AppRoutes.Main.Drawer.Tabs.Home}
                 component={HomeScreen}
                 options={{
                     tabBarIcon: HomeTabIcon,
@@ -70,7 +68,7 @@ export function TabsNavigator() {
                 }}
             />
             <Tab.Screen
-                name={AppRoutes.Main.Tabs.Communities}
+                name={AppRoutes.Main.Drawer.Tabs.Communities}
                 component={CommunitiesScreen}
                 options={{
                     tabBarIcon: CommunitiesTabIcon,
@@ -78,7 +76,7 @@ export function TabsNavigator() {
                 }}
             />
             <Tab.Screen
-                name={AppRoutes.Main.Tabs.Create}
+                name={AppRoutes.Main.Drawer.Tabs.Create}
                 component={CreateScreen}
                 options={{
                     tabBarIcon: CreateTabIcon,
@@ -86,7 +84,7 @@ export function TabsNavigator() {
                 }}
             />
             <Tab.Screen
-                name={AppRoutes.Main.Tabs.Messages}
+                name={AppRoutes.Main.Drawer.Tabs.Messages}
                 component={MessagesScreen}
                 options={{
                     tabBarIcon: MessagesTabIcon,
@@ -94,19 +92,11 @@ export function TabsNavigator() {
                 }}
             />
             <Tab.Screen
-                name={AppRoutes.Main.Tabs.Notifications}
+                name={AppRoutes.Main.Drawer.Tabs.Notifications}
                 component={NotificationsScreen}
                 options={{
                     tabBarIcon: NotificationsTabIcon,
                     tabBarActiveTintColor: COLORS.ORANGE[500],
-                }}
-            />
-
-            <Tab.Screen
-                name={AppRoutes.Main.Tabs.Account.NAVIGATOR}
-                component={AccountNavigator}
-                options={{
-                    tabBarButton: () => null,
                 }}
             />
         </Tab.Navigator>
