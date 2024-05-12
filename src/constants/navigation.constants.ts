@@ -60,4 +60,7 @@ export type AppStackParamList = {
     [AppRoutes.Splash]: undefined;
     [AppRoutes.Auth.NAVIGATOR]: NestedNavigator<AuthStackParamList>;
     [AppRoutes.Main.NAVIGATOR]: NestedNavigator<MainStackParamList>;
+    [AppRoutes.Main.Tabs.NAVIGATOR]: NestedNavigator<TabsStackParamList>;
+    [AppRoutes.Main.Tabs.Account
+        .NAVIGATOR]: NestedNavigator<AccountStackParamList>;
 };

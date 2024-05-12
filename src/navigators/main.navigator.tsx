@@ -6,7 +6,6 @@ import {
     AppRoutes,
     type MainStackParamList,
 } from "~constants/navigation.constants";
-import { Text } from "~components/ui/text.component";
 import { DrawerHeader } from "~components/layout/drawer/drawer-header.component";
 import {
     getHeaderTitleStyles,
@@ -14,6 +13,7 @@ import {
 } from "~utils/get-header-title.utils";
 import { useTheme } from "~contexts/theme.context";
 import { AccountDrawerContext } from "~contexts/drawer.context";
+import { AccountDrawerContent } from "~components/layout/drawer/account-drawer.component";
 
 import { TabsNavigator } from "./tabs.navigator";
 
@@ -38,7 +38,7 @@ export function MainNavigator() {
             onOpen={() => setIsRightDrawerOpen(true)}
             onClose={() => setIsRightDrawerOpen(false)}
             drawerPosition="right"
-            renderDrawerContent={() => <Text>Testing right drawer</Text>}>
+            renderDrawerContent={AccountDrawerContent}>
             <AccountDrawerContext.Provider value={value}>
                 <Drawer.Navigator
                     screenOptions={{

@@ -10,16 +10,33 @@ import { SettingsScreen } from "~screens/main/tabs/account/settings.screen";
 
 const Stack = createNativeStackNavigator<AccountStackParamList>();
 
+// TODO: fix order of navigators
+/*
+  StackNavigator
+    - Stack.Group
+      - ProfileScreen
+      - SettingsScreen
+    - CreateScreen
+    - DrawerNavigator
+      - TabsNavigator
+        - HomeScreen
+        - CommunitiesScreen
+        - MessagesScreen
+        - NotificationsScreen
+*/
 export function AccountNavigator() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false,
+            }}>
             <Stack.Screen
-                name={AppRoutes.Main.Account.Profile}
+                name={AppRoutes.Main.Tabs.Account.Profile}
                 component={ProfileScreen}
             />
 
             <Stack.Screen
-                name={AppRoutes.Main.Account.Settings}
+                name={AppRoutes.Main.Tabs.Account.Settings}
                 component={SettingsScreen}
             />
         </Stack.Navigator>
