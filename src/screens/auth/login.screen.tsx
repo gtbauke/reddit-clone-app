@@ -74,6 +74,12 @@ export function LoginScreen() {
         });
     };
 
+    const handleSignUpPress = () => {
+        navigation.navigate(AppRoutes.Auth.NAVIGATOR, {
+            screen: AppRoutes.Auth.SignUp,
+        });
+    };
+
     return (
         <Layout style={styles.container}>
             <Text>
@@ -129,7 +135,7 @@ export function LoginScreen() {
                         disabled={!isValid || isLoading}>
                         Log in
                     </Button>
-                    <TouchableText onPress={() => null} notImportant>
+                    <TouchableText onPress={handleSignUpPress} notImportant>
                         Don't have an account?{" "}
                         <Text style={styles.highlightedText}>Sign up</Text>
                     </TouchableText>

@@ -9,6 +9,8 @@ import { CheckYourEmailScreen } from "~screens/auth/check-your-email.screen";
 import { ForgotPasswordScreen } from "~screens/auth/forgot-password.screen";
 import { LoginScreen } from "~screens/auth/login.screen";
 
+import { SignUpScreen } from "../screens/auth/sign-up.screen";
+
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 export function AuthNavigator() {
@@ -26,6 +28,10 @@ export function AuthNavigator() {
             <Stack.Screen
                 name={AppRoutes.Auth.CheckYourEmail}
                 component={CheckYourEmailScreen}
+            />
+            <Stack.Screen
+                name={AppRoutes.Auth.SignUp}
+                component={SignUpScreen}
             />
         </Stack.Navigator>
     );
