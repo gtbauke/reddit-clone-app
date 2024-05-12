@@ -65,6 +65,10 @@ export function LoginScreen() {
         await new Promise(resolve => setTimeout(resolve, 2000));
         console.log(data);
 
+        navigation.navigate(AppRoutes.Main.NAVIGATOR, {
+            screen: AppRoutes.Main.Home,
+        });
+
         setIsLoading(false);
     };
 

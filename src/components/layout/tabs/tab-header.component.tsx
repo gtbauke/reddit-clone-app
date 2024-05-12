@@ -1,39 +1,47 @@
 import { type BottomTabHeaderProps } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { Text } from "~components/ui/text.component";
-import { useThemedStyles } from "~hooks/use-themed-styles.hook";
-import { createThemedStyles } from "~styles/theme.styles";
+import { FONT } from "~styles/font.styles";
+import { SPACE } from "~styles/spacing.styles";
+import { type StyleSheetType } from "~styles/theme.styles";
 
 export function TabHeader({
     navigation,
     options,
     route,
 }: BottomTabHeaderProps) {
-    const styles = useThemedStyles(themedStyles);
+    const { headerStyle, headerTitleStyle } = options;
+
+    const containerStyles = StyleSheet.compose(
+        styles.container,
+        headerStyle as StyleSheetType,
+    );
+    const textStyles = StyleSheet.compose(
+        styles.text,
+        headerTitleStyle as StyleSheetType,
+    );
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>{route.name}</Text>
+        <View style={containerStyles}>
+            <Text style={textStyles}>{route.name}</Text>
         </View>
     );
 }
 
-const themedStyles = createThemedStyles(theme => ({
+const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: theme.SPACE.XLARGE,
-        paddingVertical: theme.SPACE.MEDIUM,
-        backgroundColor: theme.BACKGROUND,
+        paddingHorizontal: SPACE.XLARGE,
+        paddingVertical: SPACE.MEDIUM,
         flexDirection: "row",
         alignItems: "center",
-        gap: theme.SPACE.SMALL,
+        gap: SPACE.SMALL,
     },
 
     text: {
-        fontSize: theme.FONT.SIZE.XLARGE,
-        fontWeight: theme.FONT.WEIGHT.BOLD,
-        lineHeight: theme.FONT.LINE_HEIGHT.LARGE,
-        color: theme.TEXT,
+        fontSize: FONT.SIZE.XLARGE,
+        fontWeight: FONT.WEIGHT.BOLD,
+        lineHeight: FONT.LINE_HEIGHT.LARGE,
     },
-}));
+});

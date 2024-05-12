@@ -14,6 +14,7 @@ import { COLORS } from "~styles/colors.styles";
 import { SPACE } from "~styles/spacing.styles";
 import { CreateScreen } from "~screens/main/tabs/create.screen";
 import { TabHeader } from "~components/layout/tabs/tab-header.component";
+import { useTheme } from "~contexts/theme.context";
 
 import { AccountNavigator } from "./account.navigator";
 
@@ -52,11 +53,15 @@ function NotificationsTabIcon({ color }: { color: string; focused: boolean }) {
 }
 
 function TabNavigator() {
+    const { theme } = useTheme();
+
     return (
         <Tab.Navigator
             backBehavior="history"
             screenOptions={{
                 header: TabHeader,
+                headerStyle: { backgroundColor: theme.BACKGROUND },
+                headerTitleStyle: { color: theme.TEXT },
                 tabBarStyle: {
                     paddingVertical: SPACE.XSMALL,
                 },
