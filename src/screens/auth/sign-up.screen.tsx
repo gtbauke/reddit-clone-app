@@ -111,6 +111,9 @@ export function SignUpScreen() {
 
     const onSubmit = async (data: SignUpFormData) => {
         console.log(data);
+        navigation.navigate(AppRoutes.Main.NAVIGATOR, {
+            screen: AppRoutes.Main.Home,
+        });
     };
 
     const handleLoginPress = () => {

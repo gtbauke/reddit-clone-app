@@ -10,6 +10,7 @@ import {
 import { SplashScreen } from "~screens/splash.screen";
 
 import { AuthNavigator } from "./auth.navigator";
+import { MainNavigator } from "./main.navigator";
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -35,9 +36,15 @@ export function RootNavigator() {
                     component={SplashScreen}
                 />
 
+                {/* TODO: conditional render right navigator depending if user is logged in or not */}
                 <Stack.Screen
                     name={AppRoutes.Auth.NAVIGATOR}
                     component={AuthNavigator}
+                />
+
+                <Stack.Screen
+                    name={AppRoutes.Main.NAVIGATOR}
+                    component={MainNavigator}
                 />
             </Stack.Navigator>
         </>

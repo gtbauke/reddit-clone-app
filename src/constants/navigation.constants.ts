@@ -10,6 +10,9 @@ export const AppRoutes = {
     Main: {
         NAVIGATOR: "Main",
         Home: "Home",
+        Communities: "Communities",
+        Messages: "Messages",
+        Notifications: "Notifications",
     },
 } as const;
 
@@ -27,6 +30,9 @@ export type AuthStackParamList = {
 
 export type MainStackParamList = {
     [AppRoutes.Main.Home]: undefined;
+    [AppRoutes.Main.Communities]: undefined;
+    [AppRoutes.Main.Messages]: undefined;
+    [AppRoutes.Main.Notifications]: undefined;
 };
 
 export type AppStackParamList = {
