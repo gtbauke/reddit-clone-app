@@ -37,7 +37,7 @@ export function Button({
 
     return (
         <TouchableOpacity
-            style={containerStyle}
+            style={[containerStyle, disabled && styles.disabledContainer]}
             onPress={onPress}
             disabled={disabled}>
             {renderChildren()}
@@ -54,6 +54,10 @@ const getStyles = createThemedStyles(theme => ({
         backgroundColor: theme.PRIMARY[500],
         borderRadius: theme.BORDER_RADIUS.MEDIUM,
         paddingVertical: theme.SPACE.MEDIUM,
+    },
+
+    disabledContainer: {
+        backgroundColor: theme.PRIMARY[300],
     },
 
     text: {

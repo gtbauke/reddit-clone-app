@@ -35,16 +35,19 @@ export type Theme = {
         MEDIUM: number;
         LARGE: number;
     };
+
+    COLORS: typeof COLORS;
 };
 
 const BASE_THEME = {
-    FONT: FONT,
-    SPACE: SPACE,
+    FONT,
+    SPACE,
     BORDER_RADIUS: {
         SMALL: 5,
         MEDIUM: 10,
         LARGE: 20,
     },
+    COLORS,
 };
 
 export const DARK_THEME: Theme = {
