@@ -2,17 +2,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
+import { TabBar } from "~components/layout/tabs/tab-bar.component";
 import {
     AppRoutes,
     type TabsStackParamList,
 } from "~constants/navigation.constants";
+import { useTheme } from "~contexts/theme.context";
 import { CommunitiesScreen } from "~screens/main/tabs/communities.screen";
-import { CreateScreen } from "~screens/main/tabs/create.screen";
 import { HomeScreen } from "~screens/main/tabs/home.screen";
 import { MessagesScreen } from "~screens/main/tabs/messages.screen";
 import { NotificationsScreen } from "~screens/main/tabs/notifications.screen";
 import { COLORS } from "~styles/colors.styles";
-import { SPACE } from "~styles/spacing.styles";
 
 const Tab = createBottomTabNavigator<TabsStackParamList>();
 
@@ -36,10 +36,6 @@ function CommunitiesTabIcon({ color }: { color: string; focused: boolean }) {
     return <TabBarIcon name="users" color={color} size={24} />;
 }
 
-function CreateTabIcon({ color }: { color: string; focused: boolean }) {
-    return <TabBarIcon name="plus" color={color} size={24} />;
-}
-
 function MessagesTabIcon({ color }: { color: string; focused: boolean }) {
     return <TabBarIcon name="message-square" color={color} size={24} />;
 }
@@ -49,16 +45,18 @@ function NotificationsTabIcon({ color }: { color: string; focused: boolean }) {
 }
 
 export function TabsNavigator() {
+    const { theme } = useTheme();
+
     return (
         <Tab.Navigator
             backBehavior="history"
             screenOptions={{
                 headerShown: false,
-                tabBarStyle: {
-                    paddingVertical: SPACE.XSMALL,
-                },
+                tabBarShowLabel: true,
             }}
-            initialRouteName={AppRoutes.Main.Drawer.Tabs.Home}>
+            initialRouteName={AppRoutes.Main.Drawer.Tabs.Home}
+            // eslint-disable-next-line react/no-unstable-nested-components
+            tabBar={props => <TabBar theme={theme} {...props} />}>
             <Tab.Screen
                 name={AppRoutes.Main.Drawer.Tabs.Home}
                 component={HomeScreen}
@@ -72,14 +70,6 @@ export function TabsNavigator() {
                 component={CommunitiesScreen}
                 options={{
                     tabBarIcon: CommunitiesTabIcon,
-                    tabBarActiveTintColor: COLORS.ORANGE[500],
-                }}
-            />
-            <Tab.Screen
-                name={AppRoutes.Main.Drawer.Tabs.Create}
-                component={CreateScreen}
-                options={{
-                    tabBarIcon: CreateTabIcon,
                     tabBarActiveTintColor: COLORS.ORANGE[500],
                 }}
             />

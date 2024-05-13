@@ -13,13 +13,13 @@ export const AppRoutes = {
             Profile: "Profile",
             Settings: "Settings",
         },
+        Create: "Create",
         Drawer: {
             NAVIGATOR: "Drawer",
             Tabs: {
                 NAVIGATOR: "Tabs",
                 Home: "Home",
                 Communities: "Communities",
-                Create: "Create",
                 Messages: "Messages",
                 Notifications: "Notifications",
             },
@@ -42,7 +42,6 @@ export type AuthStackParamList = {
 export type TabsStackParamList = {
     [AppRoutes.Main.Drawer.Tabs.Home]: undefined;
     [AppRoutes.Main.Drawer.Tabs.Communities]: undefined;
-    [AppRoutes.Main.Drawer.Tabs.Create]: undefined;
     [AppRoutes.Main.Drawer.Tabs.Messages]: undefined;
     [AppRoutes.Main.Drawer.Tabs.Notifications]: undefined;
 };
@@ -55,6 +54,7 @@ export type MainStackParamList = {
     [AppRoutes.Main.Drawer.NAVIGATOR]: NestedNavigator<DrawerStackParamList>;
     [AppRoutes.Main.Account.Profile]: undefined;
     [AppRoutes.Main.Account.Settings]: undefined;
+    [AppRoutes.Main.Create]: undefined;
 };
 
 export type AppStackParamList = {

@@ -26,6 +26,7 @@ export type Theme = {
     TEXT_ALT: Color;
     BACKGROUND: Color;
     BACKGROUND_ALT: Color;
+    BORDER_COLOR: Color;
 
     FONT: typeof FONT;
     SPACE: typeof SPACE;
@@ -58,6 +59,7 @@ export const DARK_THEME: Theme = {
     TEXT_ALT: COLORS.GREY[200],
     BACKGROUND: COLORS.GREY[950],
     BACKGROUND_ALT: COLORS.GREY[800],
+    BORDER_COLOR: COLORS.GREY[700],
 };
 
 export const LIGHT_THEME: Theme = {
@@ -68,6 +70,7 @@ export const LIGHT_THEME: Theme = {
     TEXT_ALT: COLORS.GREY[700],
     BACKGROUND: COLORS.GREY[50],
     BACKGROUND_ALT: COLORS.GREY[100],
+    BORDER_COLOR: COLORS.GREY[200],
 };
 
 export type StyleSheetType = Record<string, ViewStyle | TextStyle | ImageStyle>;

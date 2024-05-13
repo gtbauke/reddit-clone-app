@@ -5,9 +5,10 @@ import {
     type MainStackParamList,
     AppRoutes,
 } from "~constants/navigation.constants";
-import { ProfileScreen } from "~screens/main/tabs/account/profile.screen";
-import { SettingsScreen } from "~screens/main/tabs/account/settings.screen";
+import { ProfileScreen } from "~screens/main/account/profile.screen";
+import { SettingsScreen } from "~screens/main/account/settings.screen";
 import { Header } from "~components/layout/header.component";
+import { CreateScreen } from "~screens/main/create.screen";
 
 import { DrawerNavigator } from "./main/drawer.navigator";
 
@@ -31,12 +32,12 @@ export function MainNavigator() {
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
+                header: Header,
             }}
             initialRouteName="Drawer">
             <Stack.Group
                 screenOptions={{
                     headerShown: true,
-                    header: Header,
                 }}>
                 <Stack.Screen
                     name={AppRoutes.Main.Account.Profile}
@@ -48,6 +49,17 @@ export function MainNavigator() {
                     name={AppRoutes.Main.Account.Settings}
                     component={SettingsScreen}
                     options={{ headerTitle: "Settings" }}
+                />
+            </Stack.Group>
+
+            <Stack.Group
+                screenOptions={{
+                    presentation: "modal",
+                    headerShown: true,
+                }}>
+                <Stack.Screen
+                    name={AppRoutes.Main.Create}
+                    component={CreateScreen}
                 />
             </Stack.Group>
 
