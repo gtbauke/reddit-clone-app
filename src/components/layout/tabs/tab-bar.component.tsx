@@ -60,7 +60,7 @@ function TabBarItem({
     const tabIconColor =
         (isFocused
             ? descriptor.options.tabBarActiveTintColor
-            : descriptor.options.tabBarInactiveTintColor) ?? "black";
+            : descriptor.options.tabBarInactiveTintColor) ?? theme.TEXT;
 
     const renderLabel = () => {
         if (!descriptor.options.tabBarShowLabel) {

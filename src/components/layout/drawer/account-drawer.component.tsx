@@ -19,6 +19,7 @@ function SettingsIcon({ style }: { style: TextStyle }) {
     return <FeatherIcon name="settings" size={20} style={style} />;
 }
 
+// TODO: fix dark mode styles colors
 export function AccountDrawerContent() {
     const styles = useThemedStyles(themedStyles);
     const navigation = useNavigation();
@@ -59,6 +60,8 @@ const themedStyles = createThemedStyles(theme => ({
     container: {
         paddingVertical: theme.SPACE.LARGE,
         gap: theme.SPACE.XLARGE,
+        backgroundColor: theme.BACKGROUND_ALT,
+        flex: 1,
     },
 
     paddedContainer: {

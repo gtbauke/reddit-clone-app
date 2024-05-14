@@ -132,6 +132,8 @@ const getStyles = createThemedStyles(theme => ({
         height: "100%",
         borderLeftColor: theme.PRIMARY[300],
         borderLeftWidth: 1,
+        borderTopRightRadius: theme.BORDER_RADIUS.MEDIUM,
+        borderBottomRightRadius: theme.BORDER_RADIUS.MEDIUM,
     },
 
     helperText: {

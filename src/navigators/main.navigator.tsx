@@ -56,6 +56,8 @@ export function MainNavigator() {
                 screenOptions={{
                     presentation: "modal",
                     headerShown: true,
+                    animation: "slide_from_bottom",
+                    animationDuration: 100,
                 }}>
                 <Stack.Screen
                     name={AppRoutes.Main.Create}

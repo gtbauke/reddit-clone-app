@@ -14,6 +14,7 @@ import {
 import { useTheme } from "~contexts/theme.context";
 import { AccountDrawerContext } from "~contexts/drawer.context";
 import { AccountDrawerContent } from "~components/layout/drawer/account-drawer.component";
+import { GroupsDrawerContent } from "~components/layout/drawer/groups-drawer.component";
 
 import { TabsNavigator } from "./tabs.navigator";
 
@@ -44,7 +45,9 @@ export function DrawerNavigator() {
                     screenOptions={{
                         header: DrawerHeader,
                         headerStyle: { backgroundColor: theme.BACKGROUND },
-                    }}>
+                        drawerStyle: { backgroundColor: theme.BACKGROUND },
+                    }}
+                    drawerContent={GroupsDrawerContent}>
                     <Drawer.Screen
                         name={AppRoutes.Main.Drawer.Tabs.NAVIGATOR}
                         component={TabsNavigator}
