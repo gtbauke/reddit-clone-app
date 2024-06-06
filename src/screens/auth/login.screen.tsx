@@ -14,6 +14,7 @@ import { useTheme } from "~contexts/theme.context";
 import { createThemedStyles } from "~styles/theme.styles";
 import { FormView } from "~components/ui/forms/form-view.component";
 import { AppRoutes } from "~constants/navigation.constants";
+import { useLogin } from "~hooks/use-login.hook";
 
 const loginSchema = z.object({
     email: z
@@ -43,6 +44,8 @@ export function LoginScreen() {
     const { theme } = useTheme();
     const styles = getStyles(theme);
 
+    const login = useLogin();
+
     const {
         handleSubmit,
         control,
@@ -56,20 +59,25 @@ export function LoginScreen() {
         resolver: zodResolver(loginSchema),
     });
 
-    const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigation();
 
     const onSubmit = async (data: LoginFormData) => {
-        setIsLoading(true);
+        try {
+            const result = await login.mutateAsync(data);
+            console.log(result);
 
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        console.log(data);
-
-        navigation.navigate(AppRoutes.Main.NAVIGATOR, {
-            screen: AppRoutes.Main.Home,
-        });
-
-        setIsLoading(false);
+            navigation.navigate(AppRoutes.Main.NAVIGATOR, {
+                screen: AppRoutes.Main.Drawer.NAVIGATOR,
+                params: {
+                    screen: AppRoutes.Main.Drawer.Tabs.NAVIGATOR,
+                    params: {
+                        screen: AppRoutes.Main.Drawer.Tabs.Home,
+                    },
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const handleForgotPasswordPress = () => {
@@ -136,7 +144,7 @@ export function LoginScreen() {
                 <View style={styles.buttonContainer}>
                     <Button
                         onPress={handleSubmit(onSubmit)}
-                        disabled={!isValid || isLoading}>
+                        disabled={!isValid || login.isLoading}>
                         Log in
                     </Button>
                     <TouchableText onPress={handleSignUpPress} notImportant>

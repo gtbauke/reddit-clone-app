@@ -5,10 +5,12 @@ import React from "react";
 import { ThemeProvider } from "src/contexts/theme.context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { QueryClientProvider } from "react-query";
 
 import { flexStyles } from "~styles/utils/flex.styles";
 
 import { RootNavigator } from "./src/navigators/root.navigator";
+import { queryClient } from "./src/services/api-client";
 
 function App(): React.JSX.Element {
     return (
@@ -16,7 +18,9 @@ function App(): React.JSX.Element {
             <SafeAreaView style={flexStyles.full}>
                 <ThemeProvider>
                     <NavigationContainer>
-                        <RootNavigator />
+                        <QueryClientProvider client={queryClient}>
+                            <RootNavigator />
+                        </QueryClientProvider>
                     </NavigationContainer>
                 </ThemeProvider>
             </SafeAreaView>
